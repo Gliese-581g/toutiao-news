@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="result">
         <h3>{{result.title}}</h3>
         <p class="media"><img :src="result.media_user.avatar_url" alt=""><span>{{result.media_user.screen_name}}</span></p>
         <div v-html="result.content" class="item"></div>
@@ -38,12 +38,7 @@
         },
         created() {
             this.getNews();
-            //     axios.get('/api/i6740712914841240072/info/')
-            //         .then(response => {
-            //             console.log(response.data.data);
-            //         })
-            //     .catch(error => console.log(error))
-            // }
+
         }
     }
 </script>

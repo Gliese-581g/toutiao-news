@@ -53,11 +53,6 @@
         width: 100%;
         /*background-color: #ed4040;*/
     }
-
-    .van-nav-bar__title {
-        /*color: white;*/
-    }
-
     .container {
         padding: 50px 0 40px 0;
     }

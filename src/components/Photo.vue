@@ -1,26 +1,29 @@
 <template>
-    <div>
-        <h3>妹子图</h3>
-        <div class="gallery">
-            <img v-for="(image, index) in images" :key="index" v-lazy="image.imageUrl"/>
-        </div>
+  <div>
+    <h3>妹子图</h3>
+    <div class="gallery">
+      <img v-for="(image, index) in images" :key="index" v-lazy="image.imageUrl" />
     </div>
+  </div>
 </template>
 
 <script>
     import axios from 'axios'
+    import scroll from '../scroll'
 
     export default {
         name: "News",
         data: function () {
             return {
                 succeed: false,
-                images: []
+                images: [],
+                url: 'https://www.mxnzp.com/api/image/girl/list/random',
+                isLoading: false
             }
         },
         methods: {
             getPhotos(images) {
-                axios.get('https://www.mxnzp.com/api/image/girl/list/random')
+                axios.get(this.url)
                     .then(response => {
                         console.log('yes')
                         const results = response.data.data;
@@ -33,22 +36,19 @@
             },
 
             scroll(images) {
-                let isLoading = false
                 window.onscroll = () => {
                     // 距离底部200px时加载一次
-                    let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
-                    if (bottomOfWindow && isLoading == false) {
-                        isLoading = true;
-                        axios.get('https://www.mxnzp.com/api/image/girl/list/random').then(response => {
+                        const _this = this;
+                        scroll.use(_this).then(response => {
                             const results = response.data.data;
                             results.forEach((item, index) => {
                                 if (index < 4) {
                                     images.push(item)
                                 }
                             })
-                            isLoading = false
+                            this.isLoading = false;
                         })
-                    }
+
                 }
 
             }
@@ -64,14 +64,14 @@
 </script>
 
 <style scoped>
-    .gallery {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-    }
+.gallery {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
 
-    .gallery img {
-        width: 100%;
-        margin: 10px;
-    }
+.gallery img {
+  width: 100%;
+  margin: 10px;
+}
 </style>

@@ -67,10 +67,10 @@ export default new Router({
         },
         {
             path: '/news',
-            name: 'news',
+            // name: 'news',
             component: News,
             children: [
-                {path: '', component: AllNews},
+                {path: '', name: 'news', component: AllNews},
                 {
                     path: 'news_tech',
                     name: 'news_tech',
