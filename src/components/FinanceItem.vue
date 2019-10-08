@@ -5,13 +5,12 @@
         <div v-html="result.content" class="item"></div>
     </div>
 </template>
-
 <script>
     import axios from 'axios'
 
 
     export default {
-        name: "Finance-item",
+        name: "finance-item",
         props: ['id'],
         data: function () {
             return {
@@ -22,7 +21,7 @@
             getNews() {
                 axios.get(`/api/i${this.id}/info/`)
                     .then(response => {
-                        console.log(response.data.data);
+                        // console.log(response.data.data);
                         this.result = response.data.data;
                     }).then(() => {
                     const imgs = document.querySelectorAll('img');
@@ -34,7 +33,6 @@
                 })
                     .catch(error => console.log(error))
             }
-
         },
         created() {
             this.getNews();

@@ -1,5 +1,6 @@
 <template>
-  <div class="finance">
+  <van-tab title="经济">
+    <div class="finance">
     <ul>
       <span id="top"></span>
       <li v-for="(list, index) in newsLists" :key="index" class="news-item">
@@ -9,7 +10,7 @@
         <router-link :to="{ name: 'finance_item', params: { id: list.item_id }}" tag="div">
           <p class="content">{{list.title}}</p>
         </router-link>
-        <div class="gallery-bottom">
+        <div class="gallery-bottom" v-if="list.image_list.length !== 0">
           <img v-for="(image, index) in list.image_list" :key="index" v-lazy="image.url" alt />
         </div>
         <p class="content-info">
@@ -39,6 +40,7 @@
       </a>
     </ul>
   </div>
+  </van-tab>
 </template>
 
 <script>
@@ -47,21 +49,19 @@ import scroll from "../scroll";
 
 export default {
   name: "Finance",
+  props: ['tab'],
   data: function() {
     return {
       newsLists: [],
-      url:
-        "/api/list/?tag=news_finance&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618",
-        isLoading: false
+      url: `/api/list/?tag=news_finance&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618`,
+      isLoading: false
     };
   },
 
   methods: {
     getNews: function() {
       axios
-        .get(
-          this.url
-        )
+        .get(this.url)
         .then(response => {
           const result = response.data.data;
           result.forEach(item => {
@@ -69,7 +69,7 @@ export default {
           });
         })
         .catch(error => console.log(error));
-    },
+    }
     // srolling() {
     //   const isLoading = {
     //       value: false
@@ -85,8 +85,10 @@ export default {
     this.getNews();
   },
   mounted() {
-      const _this = this;
+    const _this = this;
     scroll.scrolling(_this);
+    console.log(this.tab);
+    
   }
 };
 </script>
@@ -124,6 +126,8 @@ export default {
 }
 .gallery-right img {
   height: 65px;
+  width: 100px;
+  object-fit: cover;
 }
 
 .gallery-bottom {
@@ -131,12 +135,15 @@ export default {
   flex-flow: row;
   margin-bottom: 5px;
   justify-content: space-around;
+  height: 70px;
 }
 
 .gallery-bottom img {
+  display: block;
   margin-right: 3px;
-  /* width: 120px; */
-  flex: 1 1 130px;
+  /* flex: 1; */
+  width: 32%;
+  object-fit: cover;
 }
 .back-to-top {
   width: 40px;

@@ -22,7 +22,7 @@ export default {
   },
 
   scrolling(_this) {
-    window.onscroll = () => {
+    window.onscroll = () => { 
       this.use(_this).then(response => {
         const result = response.data.data;
         result.forEach(item => {

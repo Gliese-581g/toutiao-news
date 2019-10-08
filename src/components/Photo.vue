@@ -72,6 +72,6 @@
 
 .gallery img {
   width: 100%;
-  margin: 10px;
+  margin: 10px 0;
 }
 </style>

@@ -3,17 +3,8 @@
 </template>
 
 <script>
-    import {mapMutations} from 'vuex'
-
     export default {
         name: "Shopping",
-        methods: {
-            ...mapMutations([
-                'changeLeftText'])
-        },
-        created() {
-            this.changeLeftText();
-        }
     }
 </script>
 

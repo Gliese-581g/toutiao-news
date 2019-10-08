@@ -46,7 +46,7 @@ import axios from "axios";
 import scroll from "../../scroll";
 
 export default {
-  name: "AllNews",
+  name: "allNews",
   data: function() {
     return {
       newsLists: [],

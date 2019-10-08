@@ -21,20 +21,14 @@ export default {
   computed: {
     url() {
       return `https://www.mxnzp.com/api/news/list?typeId=510&page=${this
-        .page++}`;
+        .page}`;
     },
-    // page() {
-    //   let page
-    //   return page++;
-    // }
   },
   data: function() {
     return {
       newsLists: [],
-      page: 1,
       isLoading: false,
-      // url: `https://www.mxnzp.com/api/news/list?typeId=510&page=${this
-      //   .page++}`
+      page: 1
     };
   },
 
@@ -51,26 +45,26 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    scrolling() {
+      const _this = this;
+      window.onscroll = () => {
+        this.page++;
+        scroll.use(_this).then(response => {
+          const result = response.data.data;
+          result.forEach(item => {
+            _this.newsLists.push(item);
+          });
+          _this.isLoading = false;
+        });
+      };
     }
-    // srolling() {
-    //   const _this = this;
-    //   window.onscroll = () => {
-    //     scroll.use(_this).then(response => {
-    //       const result = response.data.data;
-    //       result.forEach(item => {
-    //         _this.newsLists.push(item);
-    //       });
-    //       _this.isLoading = false;
-    //     });
-    //   };
-    // }
   },
   created() {
     this.getNews();
   },
   mounted() {
-    const _this = this;
-    scroll.scrolling(_this);
+    this.scrolling();
   }
 };
 </script>
