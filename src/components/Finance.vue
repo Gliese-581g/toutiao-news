@@ -1,6 +1,5 @@
 <template>
-  <van-tab title="经济">
-    <div class="finance">
+  <div class="finance">
     <ul>
       <span id="top"></span>
       <li v-for="(list, index) in newsLists" :key="index" class="news-item">
@@ -9,38 +8,17 @@
         </div>
         <router-link :to="{ name: 'finance_item', params: { id: list.item_id }}" tag="div">
           <p class="content">{{list.title}}</p>
+          <div class="gallery-bottom" v-if="list.image_list.length !== 0">
+            <img v-for="(image, index) in list.image_list" :key="index" v-lazy="image.url" alt />
+          </div>
         </router-link>
-        <div class="gallery-bottom" v-if="list.image_list.length !== 0">
-          <img v-for="(image, index) in list.image_list" :key="index" v-lazy="image.url" alt />
-        </div>
         <p class="content-info">
           <span>{{list.media_name}}</span>
           <span>{{list.datetime}}</span>
         </p>
       </li>
-      <a href="#top">
-        <span class="back-to-top">
-          <svg
-            t="1569513187544"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="2482"
-            width="20"
-            height="20"
-          >
-            <path
-              d="M830.2 475.9L537 182.7V937h-50V182.7L193.8 475.9l-35.4-35.4L512 87l353.6 353.6-35.4 35.3z"
-              fill="white"
-              p-id="2483"
-            />
-          </svg>
-        </span>
-      </a>
     </ul>
   </div>
-  </van-tab>
 </template>
 
 <script>
@@ -49,17 +27,17 @@ import scroll from "../scroll";
 
 export default {
   name: "Finance",
-  props: ['tab'],
+  props: ["adress", "active", "number"],
   data: function() {
     return {
       newsLists: [],
-      url: `/api/list/?tag=news_finance&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618`,
+      url: `/api/list/?tag=${this.adress}&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618`,
       isLoading: false
     };
   },
 
   methods: {
-    getNews: function() {
+    getNews() {
       axios
         .get(this.url)
         .then(response => {
@@ -69,41 +47,45 @@ export default {
           });
         })
         .catch(error => console.log(error));
-    }
-    // srolling() {
-    //   const isLoading = {
-    //       value: false
+    },
+    // scrolling() {
+    //   window.onscroll = () => {
+    //     scroll.use(_this).then(response => {
+    //       const result = response.data.data;
+    //       result.forEach(item => {
+    //         _this.newsLists.push(item);
+    //       });
+    //       _this.isLoading = false;
+    //     });
     //   };
-    //   const _this = this;
-    //   let callback = function() {
-    //       scroll.callback(_this, isLoading);
-    //   }
-    //   window.onscroll = callback;
-    // }
+    // },
+    scrolled() {
+      if (this.active === this.number) {
+        const _this = this;
+        scroll.use(_this).then(response => {
+          const result = response.data.data;
+          result.forEach(item => {
+            _this.newsLists.push(item);
+          });
+          _this.isLoading = false;
+        });
+      }
+    }
   },
   created() {
     this.getNews();
   },
   mounted() {
-    const _this = this;
-    scroll.scrolling(_this);
-    console.log(this.tab);
-    
+    window.addEventListener("scroll", this.scrolled);
   }
 };
 </script>
 
 <style scoped>
-.finance {
-  padding-bottom: 10px;
-  background-color: #f0f3f6;
-}
-
 .news-item {
   background-color: #fff;
-  margin: 8px 0;
+  margin: 5px 0;
   padding: 0 10px;
-  overflow: hidden;
 }
 
 .content {
@@ -144,18 +126,5 @@ export default {
   /* flex: 1; */
   width: 32%;
   object-fit: cover;
-}
-.back-to-top {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  right: 20px;
-  bottom: 80px;
-}
-.icon {
-  margin-left: 10px;
-  margin-top: 10px;
 }
 </style>

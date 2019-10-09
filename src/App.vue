@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <!--    顶部header-->
-    <van-nav-bar title="聚合内容" :left-text="leftText" @click-left="onClickLeft"></van-nav-bar>
     <!--    内容部分content-->
     <keep-alive :include="keepAliveComponents">
       <router-view class="container"></router-view>
@@ -56,13 +54,7 @@ export default {
   /*width: 400px;*/
   /*height: 800px;*/
 }
-
-.van-nav-bar {
-  position: fixed;
-  width: 100%;
-  /*background-color: #ed4040;*/
-}
-.container {
+/* .container {
   padding: 50px 0 40px 0;
-}
+} */
 </style>

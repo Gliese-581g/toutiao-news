@@ -18,11 +18,11 @@ import scroll from "../scroll";
 
 export default {
   name: "Photo",
+  props: ["active", "number"],
   computed: {
     url() {
-      return `https://www.mxnzp.com/api/news/list?typeId=510&page=${this
-        .page}`;
-    },
+      return `https://www.mxnzp.com/api/news/list?typeId=510&page=${this.page}`;
+    }
   },
   data: function() {
     return {
@@ -48,16 +48,18 @@ export default {
     },
     scrolling() {
       const _this = this;
-      window.onscroll = () => {
-        this.page++;
-        scroll.use(_this).then(response => {
-          const result = response.data.data;
-          result.forEach(item => {
-            _this.newsLists.push(item);
+      addEventListener("scroll", () => {
+        if (this.active === this.number) {
+          this.page++;
+          scroll.use(_this).then(response => {
+            const result = response.data.data;
+            result.forEach(item => {
+              _this.newsLists.push(item);
+            });
+            _this.isLoading = false;
           });
-          _this.isLoading = false;
-        });
-      };
+        }
+      });
     }
   },
   created() {

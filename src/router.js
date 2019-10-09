@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
 import store from "./store"
-import Home from "./views/Home.vue";
-import Member from "./components/Member";
-import Shopping from "./components/Shopping";
-import Search from "./components/Search";
+import Home from "./views/tabbar/Home";
+import Member from "./views/tabbar/Member";
+import Shopping from "./views/tabbar/Shopping";
+import Search from "./views/tabbar/Search";
 import News from "./components/News";
 import Photo from "./components/Photo";
 import Message from "./components/Message";
@@ -12,10 +12,8 @@ import Video from "./components/Video";
 import Contact from "./components/Contact";
 import Shop from "./components/Shop";
 import NewsDetail from "./components/NewsDetail";
-// import Tech from "./components/Tech";
-// import Finance from "./components/Finance";
+
 import FinanceItem from "./components/FinanceItem";
-// import AllNews from "./components/news/AllNews";
 
 Vue.use(Router);
 

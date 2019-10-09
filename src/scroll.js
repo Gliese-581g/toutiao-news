@@ -21,15 +21,15 @@ export default {
     });
   },
 
-  scrolling(_this) {
-    window.onscroll = () => { 
-      this.use(_this).then(response => {
-        const result = response.data.data;
-        result.forEach(item => {
-          _this.newsLists.push(item);
-        });
-        _this.isLoading = false;
-      });
-    };
-  }
+  // scrolling(_this) {
+  //   window.onscroll = () => { 
+  //     this.use(_this).then(response => {
+  //       const result = response.data.data;
+  //       result.forEach(item => {
+  //         _this.newsLists.push(item);
+  //       });
+  //       _this.isLoading = false;
+  //     });
+  //   };
+  // }
 }
