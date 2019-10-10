@@ -5,14 +5,15 @@ import Home from "./views/tabbar/Home";
 import Member from "./views/tabbar/Member";
 import Shopping from "./views/tabbar/Shopping";
 import Search from "./views/tabbar/Search";
-import News from "./components/News";
-import Photo from "./components/Photo";
-import Message from "./components/Message";
-import Video from "./components/Video";
-import Contact from "./components/Contact";
-import Shop from "./components/Shop";
-import NewsDetail from "./components/NewsDetail";
 
+import News from "./views/homepage/News";
+import Photo from "./views/homepage/Photo";
+import Message from "./views/homepage/Message";
+import Video from "./views/homepage/Video";
+import Contact from "./views/homepage/Contact";
+import Shop from "./views/homepage/Shop";
+
+import NewsDetail from "./components/NewsDetail";
 import FinanceItem from "./components/FinanceItem";
 
 Vue.use(Router);

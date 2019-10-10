@@ -9,6 +9,8 @@ export default {
           document.documentElement.scrollTop -
           window.innerHeight <=
         200;
+        // console.log(document.documentElement.scrollTop);
+        
       if (bottomOfWindow && !_this.isLoading) {
         _this.isLoading = true;
         axios

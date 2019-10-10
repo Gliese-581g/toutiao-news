@@ -9,7 +9,7 @@
 
 <script>
     import axios from 'axios'
-    import scroll from '../scroll'
+    import scroll from '../../scroll'
 
     export default {
         name: "News",

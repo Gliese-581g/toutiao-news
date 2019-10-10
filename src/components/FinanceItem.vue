@@ -1,10 +1,12 @@
 <template>
-  <div v-if="result">
+  <div v-if="result" class="news-item">
     <van-nav-bar title="明日头条" id="top" :left-arrow="true" @click-left="onClickLeft" fixed></van-nav-bar>
     <h3 class="title">{{result.title}}</h3>
     <p class="media">
       <img :src="result.media_user.avatar_url" alt />
       <span>{{result.media_user.screen_name}}</span>
+      <button class="none-focus" @click="focusOn" v-if="!focus">+ 关注</button>
+      <button class="focus" @click="focusOn" v-else>已关注</button>
     </p>
     <div v-html="result.content" class="item"></div>
   </div>
@@ -17,7 +19,8 @@ export default {
   props: ["id"],
   data: function() {
     return {
-      result: null
+      result: null,
+      focus: false
     };
   },
   methods: {
@@ -26,7 +29,7 @@ export default {
         .get(`/api/i${this.id}/info/`)
         .then(response => {
           // console.log(response.data.data);
-          this.result = response.data.data;
+          this.result = response.data.data;          
         })
         .then(() => {
           const imgs = document.querySelectorAll("img");
@@ -40,6 +43,9 @@ export default {
     },
     onClickLeft() {
       this.$router.history.go(-1);
+    },
+    focusOn() {
+      this.focus = !this.focus;
     }
   },
   created() {
@@ -50,7 +56,10 @@ export default {
 
 <style>
 .title {
-    margin-top: 50px;
+    margin-top: 55px;
+    padding: 0 10px;
+    padding-right: 15px;
+
 }
 .media {
   margin: 10px 5px;
@@ -66,8 +75,24 @@ export default {
   font-weight: bold;
   padding-top: 3px;
 }
+.media button{
+  width: 65px;
+  margin-left: auto;
+  margin-right: 15px;
+  font-size: .7em;
+  background-color: #ed4040;
+  padding: 5px 0;
+  color: white;
+  border-radius: 30%/80%;
+  outline: none;
+  border: 0;
+}
+.media .focus {
+  background-color:rgb(209, 209, 209);
+  color: rgb(104, 120, 136);
+}
 .item {
-  padding-bottom: 20px;
+  padding-bottom: 75px;
 }
 .item p {
   text-align: left;

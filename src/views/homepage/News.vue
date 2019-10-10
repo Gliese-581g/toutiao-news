@@ -11,7 +11,7 @@
         <tech :active="active" :number="tabs.length"></tech>
         </van-tab>
       </van-tabs>
-      <!-- <router-view></router-view> -->
+      <router-view></router-view>
     </div>
     <a href="#top">
       <span class="back-to-top">
@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import Finance from "./Finance";
-import Tech from "./Tech";
+import Finance from "../../components/Finance"
+import Tech from "../../components/Tech"
 
 export default {
   name: "news",

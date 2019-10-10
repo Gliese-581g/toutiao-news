@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueLazyload from 'vue-lazyload'
-import { Tabbar, TabbarItem, NavBar, Icon, Swipe, SwipeItem, Panel, Tab, Tabs } from 'vant';
+import { Tabbar, TabbarItem, NavBar, Icon, Swipe, SwipeItem, Panel, Tab, Tabs, List } from 'vant';
 
 
 Vue.use(VueLazyload, {
@@ -16,6 +16,7 @@ Vue.use(Tabbar).use(TabbarItem);
 Vue.use(NavBar);
 Vue.use(Panel);
 Vue.use(Tab).use(Tabs);
+Vue.use(List);
 
 Vue.config.productionTip = false;
 

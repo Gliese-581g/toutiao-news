@@ -1,10 +1,10 @@
 <template>
-    <div>这是会员界面</div>
+    <div></div>
 </template>
 
 <script>
     export default {
-        name: "Member"
+        name: "Video"
     }
 </script>
 
