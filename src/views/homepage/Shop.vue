@@ -1,5 +1,6 @@
 <template>
     <div>
+        you can see me!
     </div>
 </template>
 <script>

@@ -5,8 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    // activeName: "all_news",
-    keepAliveComponents: []
+    keepAliveComponents: [],
+    srcollTop: 0
   },
   mutations: {
     keepAlive(state, component) {
@@ -18,9 +18,9 @@ export default new Vuex.Store({
       const index = state.keepAliveComponents.indexOf(component);
       index !== -1 && state.keepAliveComponents.splice(index, 1);
     },
-    // changeTab(state, name) {
-    //   state.activeName = name;
-    // }
+    savePosition(state, position) {
+      state.srcollTop = position;
+    }
   },
   actions: {}
 });

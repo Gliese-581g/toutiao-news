@@ -3,15 +3,29 @@
     <!--    顶部header-->
     <van-nav-bar title="明日头条" id="top"></van-nav-bar>
     <div>
-      <van-tabs v-model="active" :border="false" :swipe-threshold="6" animated sticky>
-        <van-tab v-for="(tab, index) in tabs" :key="index" :title="tab.title">
-          <finance :adress="tab.url" :active="active" :number="index"></finance>
+      <van-tabs
+        v-model="active"
+        :border="false"
+        :swipe-threshold="6"
+        @change="beforeLeave"
+        animated
+        sticky
+      >
+        <van-tab
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :title="tab.title"
+          :to="{name: 'finance', params: {id: tab.url}}"
+        >
+          <router-view></router-view>
+          <!-- <finance :adress="tab.url" :active="active" :number="index"></finance> -->
         </van-tab>
-        <van-tab title="科技">
-        <tech :active="active" :number="tabs.length"></tech>
+        <van-tab title="科技" :to="{name: 'tech'}">
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </van-tab>
       </van-tabs>
-      <router-view></router-view>
     </div>
     <a href="#top">
       <span class="back-to-top">
@@ -37,14 +51,14 @@
 </template>
 
 <script>
-import Finance from "../../components/Finance"
-import Tech from "../../components/Tech"
+// import Finance from "../../components/Finance";
+// import Tech from "../../components/Tech";
 
 export default {
   name: "news",
   components: {
-    Finance,
-    Tech
+    // Finance,
+    // Tech
   },
   data() {
     return {
@@ -59,6 +73,22 @@ export default {
       ]
     };
   },
+  methods: {
+    beforeLeave() {
+      let position = document.documentElement.scrollTop;
+      this.$store.commit("savePosition", position);
+    }
+  },
+  created() {},
+  mounted() {},
+  
+
+  //   beforeRouteEnter (to, from, next) {
+  //     next(vm => {
+  //     vm.$router.push({ name: "finance", params: { id: "__all__" } });
+  //   })
+  // },
+
   beforeRouteLeave(to, from, next) {
     // 如果下一个页面不是详情页（C），则取消列表页（B）的缓存
     if (to.name !== "finance_item" && to.name !== "newsdetail") {

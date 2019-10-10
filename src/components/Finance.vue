@@ -2,21 +2,21 @@
   <div class="finance">
     <van-list v-model="loading" @load="onLoad" :finished="finished">
       <ul>
-      <li v-for="(list, index) in newsLists" :key="index" class="news-item">
-        <div v-if="list.image_url !== undefined" class="gallery-right">
-          <img v-lazy="list.image_url" alt />
-        </div>
-        <router-link :to="{ name: 'finance_item', params: { id: list.item_id }}" tag="div">
-          <p class="content">{{list.title}}</p>
-          <div class="gallery-bottom" v-if="list.image_list.length !== 0">
-            <img v-for="(image, index) in list.image_list" :key="index" v-lazy="image.url" alt />
+        <li v-for="(list, index) in newsLists" :key="index" class="news-item">
+          <div v-if="list.image_url !== undefined" class="gallery-right">
+            <img v-lazy="list.image_url" alt />
           </div>
-        </router-link>
-        <p class="content-info">
-          <span>{{list.media_name}}</span>
-          <span>{{list.datetime}}</span>
-        </p>
-      </li>
+          <router-link :to="{ name: 'finance_item', params: { id: list.item_id }}" tag="div">
+            <p class="content">{{list.title}}</p>
+            <div class="gallery-bottom" v-if="list.image_list.length !== 0">
+              <img v-for="(image, index) in list.image_list" :key="index" v-lazy="image.url" alt />
+            </div>
+          </router-link>
+          <p class="content-info">
+            <span>{{list.media_name}}</span>
+            <span>{{list.datetime}}</span>
+          </p>
+        </li>
       </ul>
     </van-list>
   </div>
@@ -28,23 +28,23 @@ import scroll from "../scroll";
 
 export default {
   name: "Finance",
-  props: ["adress", "active", "number"],
+  props: ["id"],
   computed: {
-    alive() {
-      return this.number >= this.active - 1 && this.number <= this.active + 1;
-    },
+    // alive() {
+    //   return this.number >= this.active - 1 && this.number <= this.active + 1;
+    // },
     finished() {
-      if(this.active === this.number) {
-        return false
+      if (this.active === this.number) {
+        return false;
       } else {
-        return true
+        return true;
       }
     }
   },
   data: function() {
     return {
       newsLists: [],
-      url: `/api/list/?tag=${this.adress}&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618`,
+      url: `/api/list/?tag=${this.id}&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618`,
       isLoading: false,
       scroll: 0,
       loading: false
@@ -88,22 +88,9 @@ export default {
         .catch(error => console.log(error));
     }
   },
-  watch: {
-    // active: function() {
-    //   if(this.active !== this.number) {
-    //     this.scroll = document.documentElement.scrollTop
-    //   } else {
-    //     document.documentElement.scrollTop = this.scroll
-    //   }
-    // }
-  },
-  created() {
-    // this.getNews();
-  },
+  created() {},
   mounted() {
-    // window.addEventListener("scroll", this.scrolled);
-    // console.log(document.documentElement.scrollTop);
-  }
+  },
 };
 </script>
 

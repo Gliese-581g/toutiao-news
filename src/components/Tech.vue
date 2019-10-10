@@ -1,14 +1,16 @@
 <template>
   <div>
-    <ul>
-      <li class="news-item" v-for="(list, index) in newsLists" :key="index">
-        <h4>{{list.title}}</h4>
-        <router-link :to="{ name: 'newsdetail', query: {newsId: list.newsId} }">
-          <img v-lazy="list.imgList[0]" alt />
-        </router-link>
-        <div class="content">{{list.digest}}</div>
-      </li>
-    </ul>
+    <van-list v-model="loading" @load="onLoad">
+      <ul>
+        <li class="news-item" v-for="(list, index) in newsLists" :key="index">
+          <h4>{{list.title}}</h4>
+          <router-link :to="{ name: 'newsdetail', query: {newsId: list.newsId} }">
+            <img v-lazy="list.imgList[0]" alt />
+          </router-link>
+          <div class="content">{{list.digest}}</div>
+        </li>
+      </ul>
+    </van-list>
   </div>
 </template>
 
@@ -28,11 +30,24 @@ export default {
     return {
       newsLists: [],
       isLoading: false,
-      page: 1
+      page: 1,
+      loading: false
     };
   },
 
   methods: {
+    onLoad() {
+      axios
+        .get(this.url)
+        .then(response => {
+          const result = response.data.data;
+          result.forEach(item => {
+            this.newsLists.push(item);
+            this.loading = false;
+          });
+        })
+        .catch(error => console.log(error));
+    },
     getNews() {
       axios
         .get(this.url)
@@ -63,16 +78,16 @@ export default {
     }
   },
   created() {
-    this.getNews();
+    // this.getNews();
   },
   mounted() {
-    this.scrolling();
+    // this.scrolling();
   }
 };
 </script>
 
 <style scoped>
-ul {
+.van-list ul {
   list-style-type: none;
 }
 .news-item {
