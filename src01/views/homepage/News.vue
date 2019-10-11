@@ -21,9 +21,9 @@
           <!-- <finance :adress="tab.url" :active="active" :number="index"></finance> -->
         </van-tab>
         <van-tab title="科技" :to="{name: 'tech'}">
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
+          <!-- <keep-alive> -->
+            <!-- <router-view></router-view> -->
+          <!-- </keep-alive> -->
         </van-tab>
       </van-tabs>
     </div>
@@ -89,13 +89,13 @@ export default {
   //   })
   // },
 
-  beforeRouteLeave(to, from, next) {
-    // 如果下一个页面不是详情页（C），则取消列表页（B）的缓存
-    if (to.name !== "finance_item" && to.name !== "newsdetail") {
-      this.$store.commit("noKeepAlive", from.name);
-    }
-    next();
-  }
+  // beforeRouteLeave(to, from, next) {
+  //   // 如果下一个页面不是详情页（C），则取消列表页（B）的缓存
+  //   if (to.name !== "finance_item" && to.name !== "newsdetail") {
+  //     this.$store.commit("noKeepAlive", from.name);
+  //   }
+  //   next();
+  // }
 };
 </script>
 <style scoped>

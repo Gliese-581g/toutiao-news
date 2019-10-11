@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    activeNamePre: '',
+    keepAliveComponents: [],
     srcollTop: 0
   },
   mutations: {
@@ -20,9 +20,6 @@ export default new Vuex.Store({
     },
     savePosition(state, position) {
       state.srcollTop = position;
-    },
-    saveActiveNamePre(state, pre) {
-        state.activeNamePre = pre;
     }
   },
   actions: {}
