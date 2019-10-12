@@ -1,6 +1,6 @@
 <template>
-  <div v-if="result" class="news-item">
-    <van-nav-bar title="明日头条" id="top" :left-arrow="true" @click-left="onClickLeft" fixed></van-nav-bar>
+  <div v-if="loaded"  class="news-item">
+    <van-nav-bar title="今日头条" id="top" :left-arrow="true" @click-left="onClickLeft" fixed></van-nav-bar>
     <h3 class="title">{{result.title}}</h3>
     <p class="media">
       <img :src="result.media_user.avatar_url" alt />
@@ -15,21 +15,24 @@
 import axios from "axios";
 
 export default {
-  name: "finance-item",
+  name: "news-item",
   props: ["id"],
   data: function() {
     return {
-      result: null,
-      focus: false
+      result: [],
+      focus: false,
+      loaded: false
     };
   },
   methods: {
     getNews() {
+      const _this = this;
       axios
         .get(`/api/i${this.id}/info/`)
         .then(response => {
           // console.log(response.data.data);
-          this.result = response.data.data;          
+          _this.result = response.data.data;
+          _this.loaded = true;        
         })
         .then(() => {
           const imgs = document.querySelectorAll("img");
