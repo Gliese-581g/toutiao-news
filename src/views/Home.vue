@@ -17,12 +17,10 @@
           :key="index"
           :title="tab.title"
           :name="tab.url"
-          :to="{name: 'newslists', params: {id: tab.url}}"
         >
+        <news-lists :adress="tab.url"/>
         </van-tab>
       </van-tabs>
-          <router-view></router-view>
-          <router-view></router-view>
     </div>
     <!-- 回到顶部的按钮 -->
     <to-top></to-top>
@@ -31,10 +29,12 @@
 
 <script>
 import ToTop from "../components/ToTop";
+import NewsLists from './NewsLists'
 export default {
   name: "home",
   components: {
-    ToTop
+    ToTop,
+    NewsLists
   },
   computed: {
     pre() {
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     beforechange()  {
-      
+
     }
   },
   watch: {

@@ -17,7 +17,7 @@ export default {
   components: {
     NewsList
   },
-  props: ["id"],
+  props: ["adress"],
   computed: {
     activeName() {
       return this.$store.state.activeName;
@@ -26,7 +26,7 @@ export default {
   data: function() {
     return {
       lists: [],
-      url: `/api/list/?tag=${this.id}&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618`,
+      url: `/api/list/?tag=${this.adress}&ac=wap&count=20&format=json_raw&as=A17538D54D106FF&cp=585DF0A65F0F1E1&min_behot_time=1482491618`,
       loading: false
     }
   },
@@ -47,14 +47,14 @@ export default {
         .catch(error => console.log(error));
     }
   },
-  beforeRouteUpdate(to, from, next) {
-    let pre = from.params.id;
-    let position = document.documentElement.scrollTop;
-    this.$store.commit("exchangePosition");
-    this.$store.commit("savePosition", position);
-    this.$store.commit("saveActiveNamePre", pre);
-    next();
-  }
+  // beforeRouteUpdate(to, from, next) {
+  //   let pre = from.params.adress;
+  //   let position = document.documentElement.scrollTop;
+  //   this.$store.commit("exchangePosition");
+  //   this.$store.commit("savePosition", position);
+  //   this.$store.commit("saveActiveNamePre", pre);
+  //   next();
+  // }
 }
 </script>
 
