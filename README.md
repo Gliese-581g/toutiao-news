@@ -1,29 +1,25 @@
-# heima-project01
+#  一个Vue仿头条的移动端单页面应用
 
-## Project setup
+## 1. 项目描述
+
+1. 一个`Vue`仿头条的移动端单页面应用
+2. 使用的技术栈：Vue全家桶，ES6语法，Vant-ui，vue-lazyload
+
+## 2. 界面功能
+* 一个主界面组件
+* 一个新闻列表组件
+* 一个新闻内容组件
+
+## 3. 如何运行 
+
+### 安装
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 运行
+
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
