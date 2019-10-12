@@ -10,7 +10,11 @@
 * 一个新闻列表组件
 * 一个新闻内容组件
 
-## 3. 如何运行 
+## 3. API
+
+使用[今日头条api分析](https://github.com/iMeiji/Toutiao/wiki/%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1Api%E5%88%86%E6%9E%90)这个api获取头条的json数据
+
+## 4. 如何运行 
 
 ### 安装
 
