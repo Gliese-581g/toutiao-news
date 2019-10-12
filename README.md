@@ -23,3 +23,4 @@ npm install
 ```
 npm run serve
 ```
+请在浏览器中使用响应式设计模式打开
