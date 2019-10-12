@@ -82,8 +82,8 @@ export default {
           const result = response.data.data;
           result.forEach(item => {
             this.newsLists.push(item);
-            this.loading = false;
           });
+            this.loading = false;
         })
         .catch(error => console.log(error));
     }

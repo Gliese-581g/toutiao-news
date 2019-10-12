@@ -11,7 +11,6 @@
         <tech :active="active" :number="tabs.length"></tech>
         </van-tab>
       </van-tabs>
-      <router-view></router-view>
     </div>
     <a href="#top">
       <span class="back-to-top">
