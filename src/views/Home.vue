@@ -1,14 +1,14 @@
 <template>
   <div>
     <!--  顶部header  -->
-    <van-nav-bar title="明日头条" id="top"></van-nav-bar>
+    <van-nav-bar title="今日头条" id="top"></van-nav-bar>
     <!--  tab栏和新闻列表  -->
     <div>
       <van-tabs
         v-model="activeName"
         :border="false"
         :swipe-threshold="6"
-        @change="beforeLeave"
+        @change="beforechange"
         animated
         sticky
       >
@@ -19,9 +19,10 @@
           :name="tab.url"
           :to="{name: 'newslists', params: {id: tab.url}}"
         >
-          <router-view v-if="tab.url === activeName || tab.url === pre"></router-view>
         </van-tab>
       </van-tabs>
+          <router-view></router-view>
+          <router-view></router-view>
     </div>
     <!-- 回到顶部的按钮 -->
     <to-top></to-top>
@@ -54,9 +55,13 @@ export default {
     };
   },
   methods: {
-    beforeLeave() {
-      let position = document.documentElement.scrollTop;
-      this.$store.commit("savePosition", position);
+    beforechange()  {
+      
+    }
+  },
+  watch: {
+    activeName: function() {
+      this.$store.commit('saveActiveName', this.activeName);
     }
   },
   created() {

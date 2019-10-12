@@ -24,14 +24,6 @@ const router = new Router({
                     keepAlive: true
                   }
                 },
-                // {
-                //   path: "tech",
-                //   name: "tech",
-                //   component: Tech,
-                //   meta: {
-                //     keepAlive: true
-                //   }
-                // }
               ]
           },
           {
@@ -45,17 +37,9 @@ const router = new Router({
           }
 
     ],
-    scrollBehavior(to, from, savedPosition) {
-        if (savedPosition) {
-          return savedPosition;
-        } else {
-          if (from.meta.keepAlive) {
-            from.meta.savedPosition = store.state.srcollTop;
-          }
-          console.log(from.meta.savedPosition);
-          console.log(to.meta.savedPosition);
-          return { x: 0, y: to.meta.savedPosition || 0 };
-        }
+    scrollBehavior() { //因为to和from都是同一个组件:id指向同一个组件    
+          let postision = store.state.scrollTop.pre;          
+          return { x: 0, y: postision || 0 };
       }
 })
 

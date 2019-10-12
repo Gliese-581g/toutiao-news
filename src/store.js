@@ -6,7 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     activeNamePre: '',
-    srcollTop: 0
+    activeName: '__all__',
+    scrollTop: {
+      pre: 0,
+      curr: 0
+    },
   },
   mutations: {
     keepAlive(state, component) {
@@ -18,11 +22,20 @@ export default new Vuex.Store({
       const index = state.keepAliveComponents.indexOf(component);
       index !== -1 && state.keepAliveComponents.splice(index, 1);
     },
-    savePosition(state, position) {
-      state.srcollTop = position;
+    // savePosition(state, position) {
+    //   state.srcollTop = position;
+    // },
+    savePosition(state, curr) {
+      state.scrollTop.curr = curr;
+    },
+    exchangePosition(state) {
+      state.scrollTop.pre =  state.scrollTop.curr;
     },
     saveActiveNamePre(state, pre) {
         state.activeNamePre = pre;
+    },
+    saveActiveName(state, activeName) {
+      state.activeName = activeName;
     }
   },
   actions: {}
