@@ -1,6 +1,6 @@
 <template>
-  <div class="news-lists">
-    <van-list v-model="loading" @load="onLoad">
+  <div class="news-lists" ref="scroll">
+    <van-list v-model="loading" @load="onLoad" :finished="!(activeName === adress)">
       <ul>
         <news-list v-for="(list, index) in lists" :list="list" :key="index"></news-list>
       </ul>
@@ -17,12 +17,7 @@ export default {
   components: {
     NewsList
   },
-  props: ["adress"],
-  computed: {
-    activeName() {
-      return this.$store.state.activeName;
-    }
-  },
+  props: ["adress", "activeName"],
   data: function() {
     return {
       lists: [],
@@ -39,7 +34,6 @@ export default {
           const result = response.data.data;
           result.forEach(item => {
             this.lists.push(item);
-            console.log(this.url);       
           });
             this.loading = false;
                     
@@ -47,14 +41,6 @@ export default {
         .catch(error => console.log(error));
     }
   },
-  // beforeRouteUpdate(to, from, next) {
-  //   let pre = from.params.adress;
-  //   let position = document.documentElement.scrollTop;
-  //   this.$store.commit("exchangePosition");
-  //   this.$store.commit("savePosition", position);
-  //   this.$store.commit("saveActiveNamePre", pre);
-  //   next();
-  // }
 }
 </script>
 

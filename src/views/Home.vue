@@ -3,22 +3,16 @@
     <!--  顶部header  -->
     <van-nav-bar title="今日头条" id="top"></van-nav-bar>
     <!--  tab栏和新闻列表  -->
-    <div>
+    <div >
       <van-tabs
         v-model="activeName"
         :border="false"
         :swipe-threshold="6"
-        @change="beforechange"
         animated
         sticky
       >
-        <van-tab
-          v-for="(tab, index) in tabs"
-          :key="index"
-          :title="tab.title"
-          :name="tab.url"
-        >
-        <news-lists :adress="tab.url"/>
+        <van-tab v-for="(tab, index) in tabs" :key="index" :title="tab.title" :name="tab.url">
+          <news-lists :adress="tab.url" :activeName="activeName"/>
         </van-tab>
       </van-tabs>
     </div>
@@ -29,18 +23,14 @@
 
 <script>
 import ToTop from "../components/ToTop";
-import NewsLists from './NewsLists'
+import NewsLists from "./NewsLists";
 export default {
   name: "home",
   components: {
     ToTop,
     NewsLists
   },
-  computed: {
-    pre() {
-      return this.$store.state.activeNamePre;
-    }
-  },
+
   data() {
     return {
       activeName: "__all__",
@@ -53,19 +43,6 @@ export default {
         { title: "财经", url: "news_finance" }
       ]
     };
-  },
-  methods: {
-    beforechange()  {
-
-    }
-  },
-  watch: {
-    activeName: function() {
-      this.$store.commit('saveActiveName', this.activeName);
-    }
-  },
-  created() {
-    this.$router.push({ name: "newslists", params: { id: "__all__" } });
   },
   mounted() {
     window.addEventListener("beforeunload", () => {
