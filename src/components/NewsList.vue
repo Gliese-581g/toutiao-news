@@ -29,12 +29,12 @@ export default {
 }
 
 .content {
-  font-size: 0.9em;
+  font-size: 1em;
   text-align: left;
   padding: 10px 0;
 }
 .content-info {
-  font-size: 0.7em;
+  font-size: 0.8em;
   color: #999999;
   padding-bottom: 15px;
 }

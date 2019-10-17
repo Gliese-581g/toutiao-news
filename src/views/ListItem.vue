@@ -69,7 +69,7 @@ export default {
   display: flex;
 }
 .media img {
-  width: 22px;
+  width: 8%;
   border-radius: 50%;
   margin-right: 8px;
 }
@@ -99,14 +99,15 @@ export default {
 }
 .item p {
   text-align: left;
-  font-size: 0.95em;
+  font-size: 1em;
   margin-bottom: 10px;
   padding: 0 8px;
 }
 .item h1 {
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 .item img {
+  width: 100%;
   margin: 16px 0;
 }
 </style>
